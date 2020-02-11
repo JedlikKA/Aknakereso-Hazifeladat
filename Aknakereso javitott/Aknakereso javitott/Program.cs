@@ -11,10 +11,10 @@ namespace Aknakereso_javitott
 
         static void Main(string[] args)
         {
-            char[,] pálya = new char[10, 10];
+            char[,] pálya = new char[12, 12];
             Feltöltés(pálya);
             Bombasorsoló(pálya);
-            Kirajzoló(pálya, false);
+            Kirajzoló(pálya, true);
             int lépx;
             int lépy;
             do
@@ -22,6 +22,7 @@ namespace Aknakereso_javitott
                 Lépés(pálya, out lépx, out lépy);
             } while (pálya[lépx, lépy] != 'B');
             Console.ReadKey();
+            //CTRL+F12, F12
         }
 
         static void Feltöltés(char[,] pálya)
@@ -38,44 +39,22 @@ namespace Aknakereso_javitott
 
         static void Lépés(char[,] pálya, out int lépx, out int lépy)
         {
-            Console.WriteLine("Kérem az oszlopszámot.");
-            lépy = int.Parse(Console.ReadLine()) - 1;
+
             Console.WriteLine("Kérem a sorszámot.");
-            lépx = int.Parse(Console.ReadLine()) - 1;
+            lépx = int.Parse(Console.ReadLine());
+            Console.WriteLine("Kérem az oszlopszámot.");
+            lépy = int.Parse(Console.ReadLine());
             if (pálya[lépx, lépy] == 'B')
             {
-                Kirajzoló(pálya, false);
+                Kirajzoló(pálya, true);
                 Console.WriteLine("Felrobbantál.");
             }
 
             else
             {
-                pálya[lépx, lépy] = 'X';
-                pálya[lépx, lépy] = '|';
-                pálya[lépx, lépy] = '_';
-                Kirajzoló(pálya, false);
+                pálya[lépx, lépy] = char.Parse(BombaszomszédSzám(pálya,lépx,lépy).ToString());
+                Kirajzoló(pálya, true);
             }
-
-            int db = 0;
-
-            for (int i = 0; i < 'X'; i++)
-            {
-                for (int j = 0; j < 'B' + 1; j++)
-                {
-                    db++;
-                }
-            }
-            if (db == 'B')
-            {
-                Console.WriteLine($"{db} db bomba van a szomszédjában.");
-
-            }
-            else
-            {
-                Console.WriteLine("Nincs bomba a szomszédjában.");
-            }
-
-
 
         }
 
@@ -90,8 +69,8 @@ namespace Aknakereso_javitott
             {
                 do
                 {
-                    sor = gép.Next(10);
-                    oszlop = gép.Next(10);
+                    sor = gép.Next(1,11);
+                    oszlop = gép.Next(1,11);
                 } while (pálya[sor, oszlop] == 'B');
                 pálya[sor, oszlop] = 'B';
             }
@@ -99,22 +78,45 @@ namespace Aknakereso_javitott
 
         static void Kirajzoló(char[,] pálya, bool legyenbomba)
         {
-            for (int i = 0; i < pálya.GetLength(0); i++)
+            for (int i = 1; i < pálya.GetLength(0)-1; i++)
             {
-                for (int j = 0; j < pálya.GetLength(1); j++)
+                for (int j = 1; j < pálya.GetLength(1)-1; j++)
                 {
-                    if (legyenbomba)
+                    if (!legyenbomba)
+                    {
+                        if (pálya[i, j] == 'B')
+                        {
+                            Console.Write('_');
+                        }
+                        else
+                        {
+                            Console.Write(pálya[i, j]);
+                        }
+                    }
+                    else
                     {
                         Console.Write(pálya[i, j]);
-                    }
-                    else if (pálya[i, j] != 'X')
-                    {
-                        Console.Write('_');
                     }
                     Console.Write('|');
                 }
                 Console.WriteLine();
             }
+        }
+
+        static int BombaszomszédSzám(char[,] pálya, int lépx, int lépy)
+        {
+            int bombadb = 0;
+            for (int i = lépx-1; i <= lépx+1; i++)
+            {
+                for (int j = lépy-1; j <= lépy+1; j++)
+                {
+                    if (pálya[i,j]=='B')
+                    {
+                        bombadb++;
+                    }
+                }
+            }
+            return bombadb;
         }
     }
 }
