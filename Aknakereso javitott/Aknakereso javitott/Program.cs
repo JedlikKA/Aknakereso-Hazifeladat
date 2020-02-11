@@ -8,6 +8,22 @@ namespace Aknakereso_javitott
 {
     class Program
     {
+
+        static void Main(string[] args)
+        {
+            char[,] pálya = new char[10, 10];
+            Feltöltés(pálya);
+            Bombasorsoló(pálya);
+            Kirajzoló(pálya, false);
+            int lépx;
+            int lépy;
+            do
+            {
+                Lépés(pálya, out lépx, out lépy);
+            } while (pálya[lépx, lépy] != 'B');
+            Console.ReadKey();
+        }
+
         static void Feltöltés(char[,] pálya)
         {
 
@@ -18,25 +34,6 @@ namespace Aknakereso_javitott
                     pálya[i, j] = '_';
                 }
             }
-        }
-
-        static void Main(string[] args)
-        {
-            char[,] pálya = new char[10, 10];
-            int bombaszám = 0;
-            Console.WriteLine("Add meg a bombaszámot.");
-            bombaszám = int.Parse(Console.ReadLine());
-            Console.Clear();
-            Feltöltés(pálya);
-            Bombasorsoló(pálya, bombaszám);
-            Kirajzoló(pálya, false);
-            int lépx;
-            int lépy;
-            do
-            {
-                Lépés(pálya, out lépx, out lépy);
-            } while (pálya[lépx, lépy] != 'B');
-            Console.ReadKey();
         }
 
         static void Lépés(char[,] pálya, out int lépx, out int lépy)
@@ -82,9 +79,11 @@ namespace Aknakereso_javitott
 
         }
 
-        static void Bombasorsoló(char[,] pálya, int bombaszám)
+        static void Bombasorsoló(char[,] pálya)
         {
             Random gép = new Random();
+            Console.WriteLine("Add meg a bombaszámot.");
+            int bombaszám = int.Parse(Console.ReadLine());
             int sor;
             int oszlop;
             for (int i = 0; i < bombaszám; i++)
