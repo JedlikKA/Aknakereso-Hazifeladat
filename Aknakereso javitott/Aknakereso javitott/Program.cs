@@ -20,6 +20,7 @@ namespace Aknakereso_javitott
             do
             {
                 Lépés(pálya, out lépx, out lépy);
+                Underscoreszámláló(pálya);
             } while (pálya[lépx, lépy] != 'B');
             Console.ReadKey();
             //CTRL+F12, F12
@@ -117,6 +118,22 @@ namespace Aknakereso_javitott
                 }
             }
             return bombadb;
+        }
+
+        static int Underscoreszámláló(char[,] pálya)
+        {
+            int Underscore = 0;
+            for (int i = 0; i < pálya.GetLength(0); i++)
+            {
+                for (int j = 0; j < pálya.GetLength(1); j++)
+                {
+                    if (pálya[i,j]=='_')
+                    {
+                        Underscore++;
+                    }
+                }
+            }
+            return Underscore;
         }
     }
 }
