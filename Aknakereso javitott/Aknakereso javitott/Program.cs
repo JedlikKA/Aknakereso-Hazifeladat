@@ -21,7 +21,8 @@ namespace Aknakereso_javitott
             {
                 Lépés(pálya, out lépx, out lépy);
                 Underscoreszámláló(pálya);
-            } while (pálya[lépx, lépy] != 'B');
+            } while (pálya[lépx, lépy] != 'B' && Underscoreszámláló(pálya)>44);
+            Console.WriteLine("Gratulálunk, ön nyert!");
             Console.ReadKey();
             //CTRL+F12, F12
         }
@@ -56,7 +57,6 @@ namespace Aknakereso_javitott
                 pálya[lépx, lépy] = char.Parse(BombaszomszédSzám(pálya,lépx,lépy).ToString());
                 Kirajzoló(pálya, true);
             }
-
         }
 
         static void Bombasorsoló(char[,] pálya)
