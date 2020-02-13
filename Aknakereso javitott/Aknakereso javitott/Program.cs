@@ -61,6 +61,9 @@ namespace Aknakereso_javitott
 
         static void Bombasorsoló(char[,] pálya)
         {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Green;
+
             Random gép = new Random();
             Console.WriteLine("Add meg a bombaszámot.");
             int bombaszám = int.Parse(Console.ReadLine());
@@ -83,6 +86,8 @@ namespace Aknakereso_javitott
             {
                 for (int j = 1; j < pálya.GetLength(1)-1; j++)
                 {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     if (!legyenbomba)
                     {
                         if (pálya[i, j] == 'B')
