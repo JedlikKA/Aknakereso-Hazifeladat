@@ -22,7 +22,10 @@ namespace Aknakereso_javitott
                 Lépés(pálya, out lépx, out lépy);
                 Underscoreszámláló(pálya);
             } while (pálya[lépx, lépy] != 'B' && Underscoreszámláló(pálya)>44);
-            Console.WriteLine("Gratulálunk, ön nyert!");
+            if (Underscoreszámláló(pálya)==44)
+            {
+                Console.WriteLine("Gratulálunk, ön nyert!");
+            }
             Console.ReadKey();
             //CTRL+F12, F12
         }
