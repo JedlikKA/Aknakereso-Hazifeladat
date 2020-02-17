@@ -13,8 +13,9 @@ namespace Aknakereso_javitott
         {
             char[,] pálya = new char[12, 12];
             Feltöltés(pálya);
-            Bombasorsoló(pálya);
             Kirajzoló(pálya, true);
+            Bombasorsoló(pálya);
+            
             int lépx;
             int lépy;
             do
@@ -58,7 +59,7 @@ namespace Aknakereso_javitott
             else
             {
                 pálya[lépx, lépy] = char.Parse(BombaszomszédSzám(pálya,lépx,lépy).ToString());
-                Kirajzoló(pálya, true);
+                Kirajzoló(pálya, false);
             }
         }
 
